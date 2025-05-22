@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCommerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Tech Store</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="email.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Produtos em destaque</h2>
+        <section class="products" id="lista-produtos">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200" alt="Notebook Gamer">
+                <h3>Notebook Gamer</h3>
+                <p>R$ 5.999,00</p>
+                <button onclick="adicionarAoCarrinho('Notebook Gamer', 5999.00)">Comprar</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200" alt="Iphone 25 pro ultra max">
+                <h3>Iphone 25 pro ultra max</h3>
+                <p>R$ 3.299,00</p>
+                <button onclick="adicionarAoCarrinho('Iphone 25 pro ultra max', 3299.00)">Comprar</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200" alt="Headset Bluetooth">
+                <h3>Headset Bluetooth</h3>
+                <p>R$ 499,00</p>
+                <button onclick="adicionarAoCarrinho('Headset Bluetooth', 499.00)">Comprar</button>
+            </div>
+        </section>
+
+        <h2>Carrinho</h2>
+        <ul id="carrinho-lista"></ul>
+        <p>Total: R$ <span id="total-carrinho">0.00</span></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 TechCommerce. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
