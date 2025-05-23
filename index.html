@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="#">Início</a></li>
-                <li><a href="email.html">Contato</a></li>
+                <li><a href="#">Contato</a></li>
             </ul>
         </nav>
     </header>
@@ -20,35 +20,54 @@
     <main>
         <h2>Produtos em destaque</h2>
         <section class="products" id="lista-produtos">
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200" alt="Notebook Gamer">
-                <h3>Notebook Gamer</h3>
-                <p>R$ 5.999,00</p>
-                <button onclick="adicionarAoCarrinho('Notebook Gamer', 5999.00)">Comprar</button>
+            <div class="product-single">
+                <img src="" alt="Notebook Gamer">
+                <h3 id="notebook">Notebook Gamer</h3>
+                <p id="precoNotebook">R$ 5.999,00</p>
+                <button>Comprar</button>
             </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200" alt="Iphone 25 pro ultra max">
-                <h3>Iphone 25 pro ultra max</h3>
-                <p>R$ 3.299,00</p>
-                <button onclick="adicionarAoCarrinho('Iphone 25 pro ultra max', 3299.00)">Comprar</button>
+            <div class="product-single">
+                <img src="" alt="Iphone 25 pro ultra max">
+                <h3 id="iphone25">Iphone 25 pro ultra max</h3>
+                <p id="precoIphone">R$ 3.299,00</p>
+                <button onclick="">Comprar</button>
             </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200" alt="Headset Bluetooth">
-                <h3>Headset Bluetooth</h3>
-                <p>R$ 499,00</p>
-                <button onclick="adicionarAoCarrinho('Headset Bluetooth', 499.00)">Comprar</button>
+            <div class="product-single">
+                <img src="" alt="Headset Bluetooth">
+                <h3 id="headset">Headset Bluetooth</h3>
+                <p id="precoHeadset">R$ 499,00</p>
+                <button onclick="enviarInfo();">Comprar</button>
             </div>
         </section>
 
         <h2>Carrinho</h2>
         <ul id="carrinho-lista"></ul>
-        <p>Total: R$ <span id="total-carrinho">0.00</span></p>
+        <p id="TotalTudo">Total: R$ <span id="totalCarrinho">0.00</span></p>
     </main>
 
     <footer>
         <p>&copy; 2025 TechCommerce. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        headset = document.getElementById("headset").textContent;
+        iphone25 = document.getElementById("iphone25").textContent;
+        notebook = document.getElementById("notebook").textContent;
+        precoHeadset = document.getElementById("precoHeadset").textContent;
+        precoIphone25 = document.getElementById("precoIphone25").textContent;
+        precoNotebook =document.getElementById("precoNotebook").textContent;
+
+
+        function enviarInfo(){
+            console.log("Você quer comprar um: " + headset + "?");
+            console.log("Você quer comprar um: " + iphone25 + "?");
+            console.log("Você quer comprar um: " + notebook + "?");
+            console.log("Você quer comprar um: " + precoHeadset + "?");
+            console.log("Você quer comprar um: " + precoIphone25 + "?");
+            console.log("Você quer comprar um: " + precoNotebook + "?");
+        }
+        
+    
+    </script>
 </body>
 </html>

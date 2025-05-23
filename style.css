@@ -47,7 +47,7 @@ main {
     margin-top: 20px;
 }
 
-.product-card {
+.product-single {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -56,20 +56,20 @@ main {
     transition: transform 0.2s;
 }
 
-.product-card:hover {
+.product-single:hover {
     transform: scale(1.05);
 }
 
-.product-card img {
+.product-single img {
     width: 100%;
     border-radius: 5px;
 }
 
-.product-card h3 {
+.product-single h3 {
     margin: 15px 0 10px;
 }
 
-.product-card p {
+.product-single p {
     font-size: 1.1em;
     margin-bottom: 15px;
 }
