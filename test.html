@@ -1,13 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Loja Simples</title>
+  <style>
+    .produto { margin-bottom: 10px; }
+    #carrinho { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; }
+    .remover { margin-left: 10px; color: red; cursor: pointer; }
+  </style>
 </head>
 <body>
-    <h1>jhfsgjkldfg</h1>
-    <p></p>
+
+  <h2>Produtos</h2>
+
+  <div class="produto">
+    <span>Produto A - R$ <span class="preco">10.00</span></span>
+    <button onclick="adicionarAoCarrinho('Produto A', 10.00)">Comprar</button>
+  </div>
+
+  <div class="produto">
+    <span>Produto B - R$ <span class="preco">25.50</span></span>
+    <button onclick="adicionarAoCarrinho('Produto B', 25.50)">Comprar</button>
+  </div>
+
+  <div id="carrinho">
+    <h3>Carrinho</h3>
+    <ul id="itens-carrinho"></ul>
+    <p><strong>Total: R$ <span id="total">0.00</span></strong></p>
+  </div>
+
+  <script>
+    const carrinho = {};
+    const itensCarrinho = document.getElementById('itens-carrinho');
+    const totalEl = document.getElementById('total');
+
+    function adicionarAoCarrinho(nome, preco) {
+      if (carrinho[nome]) {
+        carrinho[nome].quantidade += 1;
+      } else {
+        carrinho[nome] = { preco, quantidade: 1 };
+      }
+
+      atualizarCarrinho();
+    }
+
+    function removerDoCarrinho(nome) {
+      delete carrinho[nome];
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      itensCarrinho.innerHTML = '';
+      let total = 0;
+
+      for (let nome in carrinho) {
+        const item = carrinho[nome];
+        const subtotal = item.preco * item.quantidade;
+        total += subtotal;
+
+        const li = document.createElement('li');
+        li.innerHTML = `
+          ${nome} - Quantidade: ${item.quantidade} - R$ ${subtotal.toFixed(2)}
+          <span class="remover" onclick="removerDoCarrinho('${nome}')">[Excluir]</span>
+        `;
+        itensCarrinho.appendChild(li);
+      }
+
+      totalEl.textContent = total.toFixed(2);
+    }
+  </script>
+
 </body>
 </html>

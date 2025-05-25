@@ -1,19 +1,23 @@
-import mysql from 'mysql2/promise';
+const mysql = require('mysql2');
+numDeNotebooknoCarrinho;
+numDeIphonenoCarrinho;
+numDeMonitoresnoCarrinho;
+numDeTecladosnoCarrinho;
+numDeHeadsetnoCarrinho;
 
-const connection = await mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root_teste',
-    password: 1234,
-    database: 'teste'
-})
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'ecommerce'
+});
 
-try {
-    const [results, fields] = await connection.query(
-        'SHOW TABLES;'
-    );
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('CONECTOU CARALHOOOOOOO');
+});
 
-    console.log(results);
-    console.log(fields);
-} catch (err){
-    console.log(err);
+
+function atualizarBanco(nome_Prod, novaQuantidade){
+  const comandoAtualizarSql = 'UPDATE produtos SET quantidade = quantidade - ' + numDeNotebooknoCarrinho + ' WHERE nome_Prod = ' + nome_Prod;
 }
