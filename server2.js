@@ -1,23 +1,26 @@
-const mysql = require('mysql2');
-numDeNotebooknoCarrinho;
-numDeIphonenoCarrinho;
-numDeMonitoresnoCarrinho;
-numDeTecladosnoCarrinho;
-numDeHeadsetnoCarrinho;
+import mysql from 'mysql2/promise';
 
-const connection = mysql.createConnection({
+const connection = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'ecommerce'
 });
 
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('CONECTOU CARALHOOOOOOO');
-});
+// export function consultaQNTD(){
+//   const quantidadeteste fields = connection.query(
+//     `SELECT quantidade FROM produtos WHERE nome_prod = 'Headset BLuetooth';`
+//   );
+// }
 
 
-function atualizarBanco(nome_Prod, novaQuantidade){
-  const comandoAtualizarSql = 'UPDATE produtos SET quantidade = quantidade - ' + numDeNotebooknoCarrinho + ' WHERE nome_Prod = ' + nome_Prod;
+try {
+  const [quantidadeteste] = await connection.query(
+    `SELECT quantidade FROM produtos WHERE nome_prod = 'Headset BLuetooth';`
+  );
+  console.log(quantidadeteste);
+} catch (err) {
+  console.log(err);
 }
+
+finalizar();

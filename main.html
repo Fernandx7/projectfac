@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCommerce</title>
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+header {
+    background-color: #1f1f1f;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 10px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.product-single {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.2s;
+}
+
+.product-single:hover {
+    transform: scale(1.05);
+}
+
+.product-single img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.product-single h3 {
+    margin: 15px 0 10px;
+}
+
+.product-single p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #0078D7;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+footer {
+    background-color: #1f1f1f;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 380px;
+}
+
+#carrinho-lista {   
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+</style>
+
+<body>
+    <header>
+        <h1>Tech Store</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Produtos em destaque</h2>
+        <section class="products" id="lista-produtos">
+            <div class="product-single">
+                <img src="" alt="Notebook Gamer">
+                <h3 id="notebook">Notebook Gamer</h3>
+                <p id="precoNotebook">R$ 5.999,00</p>
+                 <p>quantidade disponível: <span id="quantidadeNotebook"></span></p>
+                <button>Comprar</button>
+            </div>
+            <div class="product-single">
+                <img src="" alt="Monitor Gamer">
+                <h3 id="monitor">Monitor Game</h3>
+                <p id="precoMonitor">R$ 2.999,00</p>
+                 <p>quantidade disponível: <span id="quantidadeMonitor"></span></p>
+                <button>Comprar</button>
+            </div>
+            <div class="product-single">
+                <img src="" alt="Teclado Gamer">
+                <h3 id="teclado">Teclado Gamer</h3>
+                <p id="precoTeclado">R$ 400,00</p>
+                 <p>quantidade disponível: <span id="quantidadeTeclado"></span></p>
+                <button>Comprar</button>
+            </div>
+            <div class="product-single">
+                <img src="" alt="Iphone 25 pro ultra max">
+                <h3 id="iphone25">Iphone 25 pro ultra max</h3>
+                <p id="precoIphone">R$ 3.299,00</p>
+                 <p>quantidade disponível: <span id="quantidadeIphone"></span></p>
+                <button>Comprar</button>
+            </div>  
+            <div class="product-single">
+                <img src="" alt="Headset Bluetooth">
+                <h3 id="headset">Headset Bluetooth</h3>
+                <p id="precoHeadset">R$ 499,00</p>
+                <p>quantidade disponível: <span id="quantidadeHeadset"></span></p>
+                <button>Comprar</button>
+            </div>
+        </section>
+    <div>
+        <h2>Carrinho</h2>
+        <ul id="carrinho-lista"></ul>
+        <p>Total: R$ <span id="totalCarrinho">0.00</span></p>
+        <button>Finalizar</button>
+    </div>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 TechCommerce. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+            /* so tenho que arrumar alguma forma de jogar isso no outro arquivo (server2.js)
+
+                            function finalizar(produtoheadset){
+                                    produtoheadset = document.getElementById('precoHeadsethtml').textContent;
+                                    console.log(produtoheadset);}
+                                     */
+
+        
+     // const comandoConsultar = connection.query(`SELECT quantidade FROM produtos WHERE nome_prod = 'Headset Bluethooth';`)
+
+        
+
+        // essa parte ta sendo responsavel por pegar o nome do produto
+        headset = document.getElementById("headset").textContent;
+        iphone25 = document.getElementById("iphone25").textContent;
+        notebook = document.getElementById("notebook").textContent;
+        monitor = document.getElementById("monitor").textContent;
+        teclado = document.getElementById("teclado").textContent;
+
+        // essa parte ta sendo responsavel por pegar o preco do produto
+        precoHeadset = document.getElementById("precoHeadset").textContent;
+        precoIphone25 = document.getElementById("precoIphone").textContent;
+        precoNotebook =document.getElementById("precoNotebook").textContent;
+        precoMonitor = document.getElementById("precoMonitor").textContent;
+        precoTeclado = document.getElementById("precoTeclado").textContent;
+
+    
+    </script>
+</body>
+</html>
