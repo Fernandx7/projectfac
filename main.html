@@ -132,14 +132,14 @@ footer {
             <div class="product-single">
                 <img src="" alt="Notebook Gamer">
                 <h3 id="notebook">Notebook Gamer</h3>
-                <p id="precoNotebook">R$ 5.999,00</p>
+                <p id="precoNotebook">R$ 5999,00</p>
                  <p>quantidade disponível: <span id="quantidadeNotebook"></span></p>
                 <button>Comprar</button>
             </div>
             <div class="product-single">
                 <img src="" alt="Monitor Gamer">
                 <h3 id="monitor">Monitor Game</h3>
-                <p id="precoMonitor">R$ 2.999,00</p>
+                <p id="precoMonitor">R$ 2999,00</p>
                  <p>quantidade disponível: <span id="quantidadeMonitor"></span></p>
                 <button>Comprar</button>
             </div>
@@ -148,12 +148,12 @@ footer {
                 <h3 id="teclado">Teclado Gamer</h3>
                 <p id="precoTeclado">R$ 400,00</p>
                  <p>quantidade disponível: <span id="quantidadeTeclado"></span></p>
-                <button>Comprar</button>
+                <button onclick="">Comprar</button>
             </div>
             <div class="product-single">
                 <img src="" alt="Iphone 25 pro ultra max">
                 <h3 id="iphone25">Iphone 25 pro ultra max</h3>
-                <p id="precoIphone">R$ 3.299,00</p>
+                <p id="precoIphone">R$ 3299,00</p>
                  <p>quantidade disponível: <span id="quantidadeIphone"></span></p>
                 <button>Comprar</button>
             </div>  
@@ -162,14 +162,14 @@ footer {
                 <h3 id="headset">Headset Bluetooth</h3>
                 <p id="precoHeadset">R$ 499,00</p>
                 <p>quantidade disponível: <span id="quantidadeHeadset"></span></p>
-                <button onclick="pegarINFO(nome, preco);">Comprar</button>
+                <button onclick="">Comprar</button>
             </div>
         </section>
     <div>
         <h2>Carrinho</h2>
         <ul id="carrinho-lista"></ul>
         <p>Total: R$ <span id="totalCarrinho">0.00</span></p>
-        <button>Finalizar</button>
+        <button id="botaoFinalizar" onclick="" value="submit">Finalizar</button>
     </div>
         
     </main>
@@ -178,20 +178,15 @@ footer {
         <p>&copy; 2025 TechCommerce. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-            /* so tenho que arrumar alguma forma de jogar isso no outro arquivo (server2.js) minha ideia é gerar um json que o server2.js consiga interpretar
 
-                            function finalizar(produtoheadset){
-                                    produtoheadset = document.getElementById('precoHeadsethtml').textContent;
-                                    console.log(produtoheadset);}
-                                     */
 
-        
+    <script>        
      // const comandoConsultar = connection.query(`SELECT quantidade FROM produtos WHERE nome_prod = 'Headset Bluethooth';`)
-
-        function pegarINFO(Nome, preco){
+         
+        function pegarINFO(nome, preco){
             nome = document.getElementById("headset").textContent;
             preco = document.getElementById("precoHeadset").textContent;
+            console.log(nome, preco);
         }
 
         // essa parte ta pegando o nome do produto
@@ -208,7 +203,6 @@ footer {
         precoMonitor = document.getElementById("precoMonitor").textContent;
         precoTeclado = document.getElementById("precoTeclado").textContent;
 
-    
     </script>
 </body>
 </html>
