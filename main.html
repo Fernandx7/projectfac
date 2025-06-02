@@ -162,7 +162,7 @@ footer {
                 <h3 id="headset">Headset Bluetooth</h3>
                 <p id="precoHeadset">R$ 499,00</p>
                 <p>quantidade disponível: <span id="quantidadeHeadset"></span></p>
-                <button>Comprar</button>
+                <button onclick="pegarINFO(nome, preco);">Comprar</button>
             </div>
         </section>
     <div>
@@ -179,7 +179,7 @@ footer {
     </footer>
 
     <script>
-            /* so tenho que arrumar alguma forma de jogar isso no outro arquivo (server2.js)
+            /* so tenho que arrumar alguma forma de jogar isso no outro arquivo (server2.js) minha ideia é gerar um json que o server2.js consiga interpretar
 
                             function finalizar(produtoheadset){
                                     produtoheadset = document.getElementById('precoHeadsethtml').textContent;
@@ -189,16 +189,19 @@ footer {
         
      // const comandoConsultar = connection.query(`SELECT quantidade FROM produtos WHERE nome_prod = 'Headset Bluethooth';`)
 
-        
+        function pegarINFO(Nome, preco){
+            nome = document.getElementById("headset").textContent;
+            preco = document.getElementById("precoHeadset").textContent;
+        }
 
-        // essa parte ta sendo responsavel por pegar o nome do produto
+        // essa parte ta pegando o nome do produto
         headset = document.getElementById("headset").textContent;
         iphone25 = document.getElementById("iphone25").textContent;
         notebook = document.getElementById("notebook").textContent;
         monitor = document.getElementById("monitor").textContent;
         teclado = document.getElementById("teclado").textContent;
 
-        // essa parte ta sendo responsavel por pegar o preco do produto
+        // essa parte ta pegando o preco do produto
         precoHeadset = document.getElementById("precoHeadset").textContent;
         precoIphone25 = document.getElementById("precoIphone").textContent;
         precoNotebook =document.getElementById("precoNotebook").textContent;
