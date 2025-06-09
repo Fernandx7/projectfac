@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechCommerce</title>
+
+    
 </head>
 <style>
     * {
@@ -116,6 +118,62 @@ footer {
 </style>
 
 <body>
+    
+    <?php 
+        $servername = "localhost";
+        $username = "root";
+        $password = "";    
+        $database = "ecommerce";
+        $conn = new mysqli($servername, $username, $password);
+
+    
+    $precoIphone25 = 3299;
+    $nomeIphone25 = "Iphone 25 pro ultra max";
+    $qtdIphone = "SELECT * FROM produtos WHERE nome_prod = '$nomeIphone25';";
+    $consultaIphone = $conn->query($qtdIphone);
+
+    $precoNotebook= 5999;
+    $nomeNotebook = "Notebook Gamer";
+    $qtdNotebook = "SELECT * FROM produtos WHERE nome_prod = '$nomeNotebook';";
+    $consultaNotebook = $conn->query($qtdNotebook);
+
+    $precoMonitor = 2999;
+    $nomeMonitor = "Monitor Gamer";
+    $qtdMonitor = "SELECT * FROM produtos WHERE nome_prod = '$nomeMonitor';";
+    $consultaMonitor = $conn->query($qtdMonitor);
+
+    $precoTeclado = 400;
+    $nomeTeclado = "Teclado gamer";
+    $qtdTeclado = "SELECT * FROM produtos WHERE nome_prod = '$nomeTeclado';";
+    $consultaTeclado = $conn->query($qtdTeclado);
+
+    $precoHeadset = 499;
+    $nomeHeadset =  "Headset Bluetooth";
+    $qtdHeadset = "SELECT * FROM produtos WHERE nome_prod = '$nomeHeadset';";
+    $consultaHeadset = $conn->query($qtdHeadset);
+
+
+
+// Select the ecommerce database
+$sql = "USE ecommerce;";
+if ($conn->query($sql) === TRUE) {
+    echo "Database selected successfully.<br>";
+}
+
+// Now update the product quantity
+$sql = "UPDATE produtos SET quantidade = 70 WHERE nome_prod = 'Headset bluetooth';";
+if ($conn->query($sql) === TRUE) {
+    echo "Product quantity updated successfully.";
+} else {
+    echo "Error updating product: " . $conn->error;
+}
+
+$conn->close();
+
+    ?>
+
+
+
     <header>
         <h1>Tech Store</h1>
         <nav>
@@ -131,45 +189,45 @@ footer {
         <section class="products" id="lista-produtos">
             <div class="product-single">
                 <img src="" alt="Notebook Gamer">
-                <h3 id="notebook">Notebook Gamer</h3>
-                <p id="precoNotebook">R$ 5999,00</p>
-                 <p>quantidade disponível: <span id="quantidadeNotebook"></span></p>
+                <h3 id="notebook"><?php echo $nomeNotebook?> </h3>
+                <p id="precoNotebook">R$ <?php echo $precoNotebook?></p>
+                 <p>quantidade disponível: <?php echo $qtdNotebook ?><span id="quantidadeNotebook"></span></p>
                 <button>Comprar</button>
             </div>
             <div class="product-single">
                 <img src="" alt="Monitor Gamer">
-                <h3 id="monitor">Monitor Game</h3>
-                <p id="precoMonitor">R$ 2999,00</p>
-                 <p>quantidade disponível: <span id="quantidadeMonitor"></span></p>
+                <h3 id="monitor"><?php echo $nomeMonitor?></h3>
+                <p id="precoMonitor">R$ <?php echo $precoMonitor?></p>
+                 <p>quantidade disponível: <?php echo $qtdMonitor ?> <span id="quantidadeMonitor"></span></p>
                 <button>Comprar</button>
             </div>
             <div class="product-single">
                 <img src="" alt="Teclado Gamer">
-                <h3 id="teclado">Teclado Gamer</h3>
-                <p id="precoTeclado">R$ 400,00</p>
-                 <p>quantidade disponível: <span id="quantidadeTeclado"></span></p>
+                <h3 id="teclado"> <?php echo $nomeTeclado ?> </h3>
+                <p id="precoTeclado">R$ <?php echo $precoTeclado ?> </p>
+                 <p>quantidade disponível: <?php echo $qtdTeclado ?> <span id="quantidadeTeclado"></span></p>
                 <button onclick="">Comprar</button>
             </div>
             <div class="product-single">
                 <img src="" alt="Iphone 25 pro ultra max">
-                <h3 id="iphone25">Iphone 25 pro ultra max</h3>
-                <p id="precoIphone">R$ 3299,00</p>
-                 <p>quantidade disponível: <span id="quantidadeIphone"></span></p>
-                <button>Comprar</button>
+                <h3 id="iphone25"><?php echo $nomeIphone25 ?> </h3>
+                <p id="precoIphone">R$ <?php echo $precoIphone25 ?></p>
+                 <p>quantidade disponível: <?php echo $qtdIphone ?><span id="quantidadeIphone"></span></p>
+                <button onclick="adicionarCarrinho();">Comprar</button>
             </div>  
             <div class="product-single">
                 <img src="" alt="Headset Bluetooth">
-                <h3 id="headset">Headset Bluetooth</h3>
-                <p id="precoHeadset">R$ 499,00</p>
+                <h3 id="headset"> <?php echo $nomeHeadset ?> </h3>
+                <p id="precoHeadset">R$ <?php echo $precoHeadset ?> </p>
                 <p>quantidade disponível: <span id="quantidadeHeadset"></span></p>
-                <button onclick="">Comprar</button>
+                <button onclick="adicionarCarrinho();">Comprar</button>
             </div>
         </section>
     <div>
         <h2>Carrinho</h2>
         <ul id="carrinho-lista"></ul>
         <p>Total: R$ <span id="totalCarrinho">0.00</span></p>
-        <button id="botaoFinalizar" onclick="" value="submit">Finalizar</button>
+        <button id="botaoFinalizar" value="submit">Finalizar</button>
     </div>
         
     </main>
@@ -179,10 +237,23 @@ footer {
     </footer>
 
 
+<?php 
 
-    <script>        
+
+
+?>
+     
+<script>
+
      // const comandoConsultar = connection.query(`SELECT quantidade FROM produtos WHERE nome_prod = 'Headset Bluethooth';`)
-         
+
+
+        function finalizartudo(nome){
+            nome = document.getElementById("headset").textContent;
+            console.log(`Finalizando compra do produto: ${nome}, preço: ${precoHeadset}`);
+        }
+
+
         function pegarINFO(nome, preco){
             nome = document.getElementById("headset").textContent;
             preco = document.getElementById("precoHeadset").textContent;
