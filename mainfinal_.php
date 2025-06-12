@@ -158,18 +158,28 @@ footer {
 // seleiona a database ecommerce
 $sql = "USE ecommerce;";
 if ($conn->query($sql) === TRUE) {
-    echo "Database selected successfully.<br>";
 }
 
-// isso e um teste update na tabela, vai sair dps que terminado 
-$sql = "UPDATE produtos SET quantidade = 30 WHERE nome_prod = 'Headset bluetooth';";
-if ($conn->query($sql) === TRUE) {
-    echo "Product quantity updated successfully.";
-} else {
-    echo "Error updating product: " . $conn->error;
-}
 
-$conn->close();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $carrinho_json = $_POST['carrinho'];
+    $produtos = json_decode($carrinho_json, true);
+
+    if (is_array($produtos)) {
+        $contagem = array_count_values($produtos); // conta quantas vezes cada produto aparece
+
+        foreach ($contagem as $nome_prod => $quantidade) {
+            $nome_prod = $conn->real_escape_string($nome_prod);
+            $quantidade = (int)$quantidade;
+            $sql = "UPDATE produtos 
+                    SET quantidade = quantidade - $quantidade 
+                    WHERE nome_prod = '$nome_prod' AND quantidade >= $quantidade";
+
+            if ($conn->query($sql) && $conn->affected_rows > 0) {
+            }
+        }
+    }
+}
 
     ?>
 
@@ -192,7 +202,7 @@ $conn->close();
                 <img src="" alt="Notebook Gamer">
                 <h3 id="notebook"><?php echo $nomeNotebook?></h3>
                 <p>R$ <span id="precoNotebook"><?php echo $precoNotebook?></span> </p>
-                 <p>quantidade disponível: <span id="quantidadeNotebook"> <?php echo $consultaNotebook->fetch_row()[1] ?> </span></p>
+                 <p>quantidade disponível: <span id="quantidadeNotebook"> <?php echo $consultaNotebook->fetch_assoc()['quantidade'] ?> </span></p>
                 <button onclick="adicionar(notebook, precoNotebook)">Comprar</button>
             </div>
 
@@ -200,7 +210,7 @@ $conn->close();
                 <img src="" alt="Monitor Gamer">
                 <h3 id="monitor"><?php echo $nomeMonitor?></h3>
                 <p >R$ <span id="precoMonitor"><?php echo $precoMonitor?></span> </p>
-                 <p>quantidade disponível:  <span id="quantidadeMonitor"> <?php echo $consultaMonitor->fetch_row()[1] ?> </span></p>
+                 <p>quantidade disponível:  <span id="quantidadeMonitor"> <?php echo $consultaMonitor->fetch_assoc()['quantidade'] ?> </span></p>
                 <button onclick="adicionar(monitor, precoMonitor)">Comprar</button>
             </div>
 
@@ -208,7 +218,7 @@ $conn->close();
                 <img src="" alt="Teclado Gamer">
                 <h3 id="teclado"><?php echo $nomeTeclado ?></h3>
                 <p >R$ <span id="precoTeclado"><?php echo $precoTeclado ?></span> </p>
-                 <p>quantidade disponível:  <span id="quantidadeTeclado"> <?php echo $consultaTeclado->fetch_row()[1] ?> </span></p>
+                 <p>quantidade disponível:  <span id="quantidadeTeclado"> <?php echo $consultaTeclado->fetch_assoc()['quantidade'] ?> </span></p>
                 <button onclick="adicionar(teclado, precoTeclado)">Comprar</button>
             </div>
 
@@ -216,7 +226,7 @@ $conn->close();
                 <img src="" alt="Iphone 25 pro ultra max">
                 <h3 id="iphone25"><?php echo $nomeIphone25 ?></h3>
                 <p>R$ <span id="precoIphone25"> <?php echo $precoIphone25 ?> </span></p>
-                 <p>quantidade disponível: <span id="quantidadeIphone25"> <?php echo $consultaIphone->fetch_row()[1] ?> </span></p>
+                 <p>quantidade disponível: <span id="quantidadeIphone25"> <?php echo $consultaIphone->fetch_assoc()['quantidade'] ?> </span></p>
                 <button onclick="adicionar(iphone25, precoIphone25);">Comprar</button>
             </div>  
 
@@ -224,7 +234,7 @@ $conn->close();
                 <img src="" alt="Headset Bluetooth">
                 <h3 id="headset"><?php echo $nomeHeadset ?></h3>
                 <p>R$ <span id="precoHeadset"><?php echo $precoHeadset ?></span> </p>
-                <p>quantidade disponível: <span id="quantidadeHeadset"> <?php echo $consultaHeadset->fetch_row()[1] ?> </span></p>
+                <p>quantidade disponível: <span id="quantidadeHeadset"> <?php echo $consultaHeadset->fetch_assoc()['quantidade'] ?> </span></p>
                 <button onclick="adicionar(headset, precoHeadset);">Comprar</button>
             </div>
 
@@ -233,7 +243,12 @@ $conn->close();
         <h2>Carrinho</h2>
         <ul id="carrinho-lista"></ul>
         <p>Total: R$ <span id="totalCarrinho">0.00</span></p>
-        <button id="botaoFinalizar" value="submit" onclick="finalizarCarrinho()">Finalizar</button> 
+       
+        <form id="formFinalizar" action="" method="post">
+            <input type="hidden" name="carrinho" id="carrinhoInput" value="">
+            <button id="botaoFinalizar" type="submit">Finalizar</button> 
+        </form>
+
     </div>
         
     </main>
@@ -264,6 +279,10 @@ $conn->close();
         precoMonitor = document.getElementById("precoMonitor").textContent;
         precoTeclado = document.getElementById("precoTeclado").textContent;
 
+document.getElementById('formFinalizar').addEventListener('submit', function(e) {
+    const nomesProdutos = carrinho.map(item => item.nome.trim());
+    document.getElementById('carrinhoInput').value = JSON.stringify(nomesProdutos);
+});
 
 
 
@@ -307,6 +326,7 @@ let estoque2 = [ //isso aqui ta so pegando as informações do html
             li.textContent = ` ${nome.nome} - ${nome.precoItem}`; // isso aq insere na li feita acima, o nome e o preco por isso "textContent"
             lista.appendChild(li); // isso aq add a li na lista leia "appendchild" como "adicionar filho"
             total = total + parseFloat(nome.precoItem); // é só uma lógica para pegar o valor que ja esta no carrinho e somar com o novo valor do produto que foi adicionado
+            
         }
         document.getElementById('totalCarrinho').textContent = total; // isso aq pega o total(ta declarado ali em cima) 
                                                                     // e coloca no elemento html "span" do total do carrinho
@@ -314,12 +334,10 @@ let estoque2 = [ //isso aqui ta so pegando as informações do html
         console.log();
     }
 
-    function finalizarCarrinho() {
-        console.log(carrinho); // isso aq é só pra ver no console do navegador o que ta acontecendo, se tiver algum erro, vai aparecer aqui
-        location.reload();
-    }
-
-
 </script>    
+
+
+
+
 </body>
 </html>
